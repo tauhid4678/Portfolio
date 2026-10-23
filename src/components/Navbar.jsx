@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import './components.css';
+import profileImg from '../assets/profileimg.jpg';
 
 const Navbar = ({ onOpenResume }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -43,10 +44,15 @@ const Navbar = ({ onOpenResume }) => {
     <>
       <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
         <div className="container header-container">
-          {/* Editorial Brand Identity */}
+          {/* Editorial Brand Identity with Photo Icon */}
           <a href="#home" className="header-logo">
-            <span className="logo-text">Tauhid Hasan</span>
-            <span className="logo-sub mono">Rajshahi, BD</span>
+            <div className="header-avatar-frame">
+              <img src={profileImg} alt="Md. Tauhid Hasan" className="header-avatar-img" />
+            </div>
+            <div className="header-brand-info">
+              <span className="logo-text">Tauhid Hasan</span>
+              <span className="logo-sub mono">Rajshahi, BD</span>
+            </div>
           </a>
 
           {/* Navigation Links (Desktop) */}
