@@ -1,0 +1,13 @@
+/* App Level Styles */
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+}
