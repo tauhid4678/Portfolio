@@ -32,6 +32,26 @@ const projectsList = [
   {
     id: 2,
     num: '02',
+    title: 'DrawArc Studio',
+    subtitle: 'Architectural CAD & Drafting Services Site',
+    category: 'Client Work',
+    filterTag: 'client',
+    type: 'COMMERCIAL FREELANCE PROJECT',
+    description: 'A commercial website built for an architectural drafting and 3D modeling client. Highlights precision blueprints, CAD conversion workflows, and direct consultation pathways.',
+    highlights: [
+      'Commercial client delivery showcasing drafting and CAD portfolios',
+      'Technical blueprint graphics and service scope breakdowns',
+      'Integrated WhatsApp and direct email consultation touchpoints',
+      'Fast-loading static architecture with zero performance bottlenecks'
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'CAD Portfolio'],
+    link: 'https://drawarc.netlify.app/',
+    image: drawarcImg,
+    year: '2024'
+  },
+  {
+    id: 3,
+    num: '03',
     title: 'GreenNest (TreePlantShop)',
     subtitle: 'Botanical E-Commerce & Plant Care Platform',
     category: 'E-Commerce',
@@ -50,8 +70,8 @@ const projectsList = [
     year: '2024'
   },
   {
-    id: 3,
-    num: '03',
+    id: 4,
+    num: '04',
     title: 'Hero-App',
     subtitle: 'Curated Software & Productivity Directory',
     category: 'Web Application',
@@ -67,26 +87,6 @@ const projectsList = [
     tech: ['React.js', 'Vite', 'Modern CSS', 'Netlify'],
     link: 'https://herroapp.netlify.app/',
     image: heroappImg,
-    year: '2024'
-  },
-  {
-    id: 4,
-    num: '04',
-    title: 'DrawArc Studio',
-    subtitle: 'Architectural CAD & Drafting Services Site',
-    category: 'Client Work',
-    filterTag: 'client',
-    type: 'COMMERCIAL FREELANCE PROJECT',
-    description: 'A commercial website built for an architectural drafting and 3D modeling client. Highlights precision blueprints, CAD conversion workflows, and direct consultation pathways.',
-    highlights: [
-      'Commercial client delivery showcasing drafting and CAD portfolios',
-      'Technical blueprint graphics and service scope breakdowns',
-      'Integrated WhatsApp and direct email consultation touchpoints',
-      'Fast-loading static architecture with zero performance bottlenecks'
-    ],
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'CAD Portfolio'],
-    link: 'https://drawarc.netlify.app/',
-    image: drawarcImg,
     year: '2024'
   }
 ];
