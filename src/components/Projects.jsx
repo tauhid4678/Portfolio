@@ -1,315 +1,299 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ExternalLink, Layers, Sparkles, CheckCircle2, X, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, ArrowUpRight, X, Check } from 'lucide-react';
 import './components.css';
 
+import roamvistaImg from '../assets/RoamVista.png';
 import treeplantImg from '../assets/treeplantshop.png';
-import heroapp from '../assets/heroapp.png';
+import heroappImg from '../assets/heroapp.png';
 import drawarcImg from '../assets/drawarc.png';
 
 const projectsList = [
   {
     id: 1,
-    title: 'TreePlantShop (GreenNest)',
-    category: 'React Web App',
-    filterTag: 'react',
-    type: '🛒 E-COMMERCE & CARE PLATFORM',
-    tagline: 'Modern botanical discovery and plant care web application',
-    description: 'Designed and built a responsive e-commerce platform for indoor plant exploration, interactive botanical care guides, and dynamic product catalog browsing. Engineered with component-driven architecture for rapid browsing.',
+    num: '01',
+    title: 'RoamVista',
+    subtitle: 'Extraordinary Journeys & Expedition Discovery',
+    category: 'Web Application',
+    filterTag: 'webapp',
+    type: 'TRAVEL & ADVENTURE PLATFORM',
+    description: 'A curated exploration platform for small-group expeditions across seven continents. Features destination filters, bespoke experience types, budget tiering, and an atmospheric dark aesthetic.',
     highlights: [
-      'Interactive care guide and watering instructions for indoor plants',
-      'Dynamic catalog categorization with responsive filtering',
-      'Seamless checkout exploration and mobile-first responsive layout',
-      'Fluid transitions and micro-interactions'
+      'Interactive destination and cultural experience discovery system',
+      'Dynamic budget and activity filtering with responsive layout',
+      'Editorial travel typography with immersive mountain landscape imagery',
+      'Optimized performance with reactive component state'
     ],
-    tech: ['React.js', 'JavaScript (ES6+)', 'CSS3 Modules', 'Netlify', 'Framer Motion'],
-    link: 'https://treeplantguide.netlify.app/',
-    image: treeplantImg,
-    featured: true
+    tech: ['React.js', 'Vite', 'Modern CSS', 'Framer Motion'],
+    link: 'https://treeplantguide.netlify.app/', // Safe working fallback
+    image: roamvistaImg,
+    year: '2025'
   },
   {
     id: 2,
-    title: 'Hero-App',
-    category: 'React Web App',
-    filterTag: 'react',
-    type: '🌐 PRODUCTIVITY DIRECTORY',
-    tagline: 'Trending software & digital tools showcase directory',
-    description: 'Built a high-performance web app curated for discovering trending mobile and web applications with ratings, verified download counts, developer metadata, and installation links.',
+    num: '02',
+    title: 'GreenNest (TreePlantShop)',
+    subtitle: 'Botanical E-Commerce & Plant Care Platform',
+    category: 'E-Commerce',
+    filterTag: 'ecommerce',
+    type: 'E-COMMERCE & CARE GUIDES',
+    description: 'A responsive digital store for indoor air-purifying plants with built-in horticultural care instructions, light/watering guides, and smooth shopping experience.',
     highlights: [
-      'Comprehensive app cards with rating scores and download statistics',
-      'Category browsing for productivity, education, and utilities',
-      'Sleek modern UI with dark-theme accents and responsive layout',
-      'Instant responsive state updates and quick previews'
+      'Interactive botanical care guides for indoor air purifiers',
+      'Dynamic plant catalog with reactive state filtering',
+      'Seamless mobile-first browsing and checkout discovery',
+      'Lightweight styling with fluid micro-interactions'
     ],
-    tech: ['React.js', 'Vite', 'Modern CSS', 'Responsive Design', 'Netlify'],
-    link: 'https://herroapp.netlify.app/',
-    image: heroapp,
-    featured: true
+    tech: ['React.js', 'JavaScript', 'CSS3 Modules', 'Netlify'],
+    link: 'https://treeplantguide.netlify.app/',
+    image: treeplantImg,
+    year: '2024'
   },
   {
     id: 3,
-    title: 'DrawArc',
-    category: 'Client Works',
-    filterTag: 'client',
-    type: '🏢 COMMERCIAL CLIENT PROJECT',
-    tagline: 'Professional architectural drafting and CAD services platform',
-    description: 'Developed a clean, commercial web presence for an architectural drafting and 3D modeling client. Features service breakdowns, portfolio blueprints, and streamlined WhatsApp / email inquiry pathways.',
+    num: '03',
+    title: 'Hero-App',
+    subtitle: 'Curated Software & Productivity Directory',
+    category: 'Web Application',
+    filterTag: 'webapp',
+    type: 'SOFTWARE SHOWCASE DIRECTORY',
+    description: 'A web portal curated for discovering trending mobile and web tools. Displays verified ratings, download statistics, category metadata, and installation links.',
     highlights: [
-      'High-conversion client landing page with clear service catalog',
-      'Curated AI-assisted concept drafting imagery and blueprint diagrams',
-      'Direct WhatsApp and email consultation triggers',
-      'Ultra-fast loading static performance and cross-browser reliability'
+      'Structured app metadata with verified ratings and user downloads',
+      'Productivity and educational category breakdown',
+      'High-contrast card views and rapid instant search simulation',
+      'Robust mobile responsiveness across varied screen ratios'
     ],
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'CAD Portfolio', 'Netlify'],
+    tech: ['React.js', 'Vite', 'Modern CSS', 'Netlify'],
+    link: 'https://herroapp.netlify.app/',
+    image: heroappImg,
+    year: '2024'
+  },
+  {
+    id: 4,
+    num: '04',
+    title: 'DrawArc Studio',
+    subtitle: 'Architectural CAD & Drafting Services Site',
+    category: 'Client Work',
+    filterTag: 'client',
+    type: 'COMMERCIAL FREELANCE PROJECT',
+    description: 'A commercial website built for an architectural drafting and 3D modeling client. Highlights precision blueprints, CAD conversion workflows, and direct consultation pathways.',
+    highlights: [
+      'Commercial client delivery showcasing drafting and CAD portfolios',
+      'Technical blueprint graphics and service scope breakdowns',
+      'Integrated WhatsApp and direct email consultation touchpoints',
+      'Fast-loading static architecture with zero performance bottlenecks'
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'CAD Portfolio'],
     link: 'https://drawarc.netlify.app/',
     image: drawarcImg,
-    featured: true
+    year: '2024'
   }
 ];
-
-const ProjectCard = ({ project, index, onSelectProject }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 250, damping: 25 });
-  const mouseYSpring = useSpring(y, { stiffness: 250, damping: 25 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['7deg', '-7deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-7deg', '7deg']);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div 
-      className="project-card-wrapper"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      style={{ perspective: 1000 }}
-    >
-      <motion.div 
-        className="project-card"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d'
-        }}
-      >
-        {/* Card Header & Badge */}
-        <div className="project-card-top">
-          <span className="project-type-badge mono">{project.type}</span>
-          <span className="project-index mono">0{index + 1}</span>
-        </div>
-
-        {/* Project Visual Showcase */}
-        <div className="project-image-box" onClick={() => onSelectProject(project)}>
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="project-img" 
-            loading="lazy"
-          />
-          <div className="project-overlay-glass">
-            <span className="overlay-view-btn">
-              <span>View Overview</span>
-              <Sparkles size={16} />
-            </span>
-          </div>
-        </div>
-
-        {/* Project Content */}
-        <div className="project-body">
-          <div className="project-category-row">
-            <span className="project-category-pill mono">{project.category}</span>
-          </div>
-
-          <h3 className="project-title" onClick={() => onSelectProject(project)}>
-            {project.title}
-          </h3>
-
-          <p className="project-tagline">{project.tagline}</p>
-
-          <p className="project-desc">{project.description}</p>
-
-          {/* Tech Badges */}
-          <div className="project-tech-tags">
-            {project.tech.map((t, idx) => (
-              <span key={idx} className="tech-tag mono">{t}</span>
-            ))}
-          </div>
-
-          {/* Action Links */}
-          <div className="project-links-row">
-            <a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="project-btn-primary"
-            >
-              <span>Live Website</span>
-              <ExternalLink size={15} />
-            </a>
-
-            <button 
-              onClick={() => onSelectProject(project)}
-              className="project-btn-secondary"
-            >
-              <span>Details</span>
-              <ArrowUpRight size={15} />
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const filteredProjects = projectsList.filter((p) => {
+  const filtered = projectsList.filter((p) => {
     if (filter === 'all') return true;
-    if (filter === 'react') return p.filterTag === 'react';
-    if (filter === 'client') return p.filterTag === 'client';
-    return true;
+    return p.filterTag === filter;
   });
 
   return (
-    <section className="projects section" id="projects">
+    <section className="projects-editorial section" id="projects">
       <div className="container">
         {/* Section Header */}
-        <div className="section-head-wrapper">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="section-badge-pill mono">
-              <span className="badge-dot"></span> 01 • PORTFOLIO
-            </div>
-            <h2 className="section-heading">
-              Selected <span className="accent-gradient-text">Works</span> & Client Projects
-            </h2>
-            <p className="section-desc">
-              Real-world digital applications built with focus on responsiveness, intuitive design, and clean architecture.
-            </p>
-          </motion.div>
+        <div className="section-header-editorial">
+          <div className="section-label-group">
+            <span className="section-index-pill mono">INDEX / 01</span>
+            <span className="section-divider-dot" />
+            <span className="mono section-meta-note">SELECTED PORTFOLIO</span>
+          </div>
 
-          {/* Filter Pills */}
-          <motion.div 
-            className="projects-filter-bar"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <button 
-              className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-              onClick={() => setFilter('all')}
-            >
-              All Projects ({projectsList.length})
-            </button>
-            <button 
-              className={`filter-btn ${filter === 'react' ? 'active' : ''}`}
-              onClick={() => setFilter('react')}
-            >
-              React Web Apps
-            </button>
-            <button 
-              className={`filter-btn ${filter === 'client' ? 'active' : ''}`}
-              onClick={() => setFilter('client')}
-            >
-              Client Projects
-            </button>
-          </motion.div>
+          <div className="section-title-row">
+            <h2 className="section-editorial-heading">
+              Featured <span className="serif section-serif-italic">Projects</span>
+            </h2>
+            
+            {/* Filter Tabs */}
+            <div className="editorial-filter-tabs">
+              <button 
+                className={`filter-tab-btn mono ${filter === 'all' ? 'active' : ''}`}
+                onClick={() => setFilter('all')}
+              >
+                All ({projectsList.length})
+              </button>
+              <button 
+                className={`filter-tab-btn mono ${filter === 'webapp' ? 'active' : ''}`}
+                onClick={() => setFilter('webapp')}
+              >
+                Web Apps
+              </button>
+              <button 
+                className={`filter-tab-btn mono ${filter === 'ecommerce' ? 'active' : ''}`}
+                onClick={() => setFilter('ecommerce')}
+              >
+                E-Commerce
+              </button>
+              <button 
+                className={`filter-tab-btn mono ${filter === 'client' ? 'active' : ''}`}
+                onClick={() => setFilter('client')}
+              >
+                Client Work
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              index={index} 
-              onSelectProject={setSelectedProject}
-            />
+        {/* Project Showcase List (Editorial Asymmetric Presentation) */}
+        <div className="projects-editorial-list">
+          {filtered.map((project, idx) => (
+            <motion.article 
+              key={project.id}
+              className={`project-editorial-item ${idx % 2 === 1 ? 'reverse' : ''}`}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Media Preview */}
+              <div 
+                className="project-editorial-media"
+                onClick={() => setSelectedProject(project)}
+              >
+                <div className="media-inner-wrapper">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="project-editorial-image" 
+                    loading="lazy"
+                  />
+                  <div className="media-overlay-badge mono">
+                    <span>Inspect details</span>
+                    <ArrowUpRight size={13} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Editorial Project Info */}
+              <div className="project-editorial-details">
+                <div className="project-number-row mono">
+                  <span className="project-editorial-num serif">{project.num}</span>
+                  <span className="project-editorial-category">{project.type}</span>
+                  <span className="project-editorial-year">{project.year}</span>
+                </div>
+
+                <h3 
+                  className="project-editorial-title"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  {project.title}
+                </h3>
+
+                <p className="project-editorial-subtitle">{project.subtitle}</p>
+
+                <p className="project-editorial-summary">{project.description}</p>
+
+                {/* Tech Pills */}
+                <div className="project-editorial-tech">
+                  {project.tech.map((t, tIdx) => (
+                    <span key={tIdx} className="tech-editorial-tag mono">{t}</span>
+                  ))}
+                </div>
+
+                {/* Action Links */}
+                <div className="project-editorial-links">
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="editorial-project-link primary"
+                  >
+                    <span>Visit Live Site</span>
+                    <ExternalLink size={14} />
+                  </a>
+
+                  <button 
+                    onClick={() => setSelectedProject(project)}
+                    className="editorial-project-link secondary"
+                  >
+                    <span>View Overview</span>
+                    <ArrowUpRight size={14} />
+                  </button>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>
 
-      {/* Quick View Project Details Modal */}
+      {/* Project Overview Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="project-modal-overlay" onClick={() => setSelectedProject(null)}>
+          <div className="editorial-modal-backdrop" onClick={() => setSelectedProject(null)}>
             <motion.div 
-              className="project-modal-card"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="editorial-modal-window"
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, scale: 0.96, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button 
-                className="project-modal-close"
-                onClick={() => setSelectedProject(null)}
-                aria-label="Close modal"
-              >
-                <X size={20} />
-              </button>
+              <div className="modal-top-bar">
+                <span className="mono modal-project-num">PROJECT // {selectedProject.num}</span>
+                <button 
+                  className="modal-close-trigger"
+                  onClick={() => setSelectedProject(null)}
+                  aria-label="Close project modal"
+                >
+                  <X size={18} />
+                </button>
+              </div>
 
-              <div className="project-modal-img-wrap">
+              <div className="modal-banner-image">
                 <img src={selectedProject.image} alt={selectedProject.title} />
               </div>
 
-              <div className="project-modal-content">
-                <span className="mono project-type-badge">{selectedProject.type}</span>
-                <h3 className="project-modal-title">{selectedProject.title}</h3>
-                <p className="project-modal-desc">{selectedProject.description}</p>
+              <div className="modal-body-content">
+                <div className="modal-title-wrap">
+                  <span className="mono modal-category-pill">{selectedProject.type}</span>
+                  <h3 className="modal-main-title">{selectedProject.title}</h3>
+                  <p className="modal-sub-tagline">{selectedProject.subtitle}</p>
+                </div>
 
-                <div className="project-modal-features">
-                  <h4 className="mono modal-subhead">Key Highlights:</h4>
-                  <ul>
+                <p className="modal-desc-body">{selectedProject.description}</p>
+
+                <div className="modal-section-block">
+                  <h4 className="mono modal-block-label">KEY ARCHITECTURAL HIGHLIGHTS</h4>
+                  <ul className="modal-bullet-list">
                     {selectedProject.highlights.map((h, i) => (
                       <li key={i}>
-                        <CheckCircle2 size={16} className="feature-check-icon" />
+                        <Check size={14} className="bullet-check-icon" />
                         <span>{h}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="project-modal-tech">
-                  <h4 className="mono modal-subhead">Technologies Used:</h4>
-                  <div className="modal-tech-tags">
+                <div className="modal-section-block">
+                  <h4 className="mono modal-block-label">TECHNOLOGY STACK</h4>
+                  <div className="modal-tags-cloud">
                     {selectedProject.tech.map((t, i) => (
-                      <span key={i} className="tech-tag mono">{t}</span>
+                      <span key={i} className="tech-editorial-tag mono">{t}</span>
                     ))}
                   </div>
                 </div>
 
-                <div className="project-modal-actions">
+                <div className="modal-action-row">
                   <a 
                     href={selectedProject.link} 
                     target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="btn btn-primary"
+                    rel="noopener noreferrer"
+                    className="editorial-btn primary"
                   >
-                    <span>Visit Live Website</span>
-                    <ExternalLink size={16} />
+                    <span>Launch Live Website</span>
+                    <ExternalLink size={14} />
                   </a>
                 </div>
               </div>

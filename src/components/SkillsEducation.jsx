@@ -1,228 +1,140 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Code2, GraduationCap, Laptop, Database, Cpu, 
-  Terminal, Sparkles, Award, Calendar, MapPin, 
-  CheckCircle, ArrowUpRight 
-} from 'lucide-react';
-import { 
-  FaReact, FaJava, FaPython, FaGitAlt, 
-  FaHtml5, FaCss3Alt, FaJs, FaDatabase 
-} from 'react-icons/fa';
-import { SiCplusplus } from 'react-icons/si';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Terminal, Laptop, Cpu, Database, Award, BookOpen, ArrowUpRight } from 'lucide-react';
 import './components.css';
 
-const skillCategories = [
+const skillGroups = [
   {
-    id: 'languages',
-    title: 'Programming Languages',
-    icon: <Terminal size={20} className="cat-icon-cyan" />,
-    description: 'Foundational and modern languages for competitive problem solving and systems development.',
-    skills: [
-      { name: 'C++', level: 'Advanced / CP' },
-      { name: 'C', level: 'Strong Core' },
-      { name: 'Java', level: 'OOP & Certified' },
-      { name: 'Python', level: 'Scripting & Algo' },
-      { name: 'JavaScript (ES6+)', level: 'Modern Frontend' },
-      { name: 'Solidity', level: 'Smart Contracts' },
-    ]
+    category: 'Programming Languages',
+    description: 'Foundational problem solving & systems development',
+    items: ['C++', 'C', 'Java', 'Python', 'JavaScript (ES6+)', 'Solidity']
   },
   {
-    id: 'frontend',
-    title: 'Frontend & Web Development',
-    icon: <Laptop size={20} className="cat-icon-indigo" />,
-    description: 'Building dynamic, responsive, and aesthetically modern web applications.',
-    skills: [
-      { name: 'React.js', level: 'Component Architecture' },
-      { name: 'HTML5 Semantic', level: 'Standards & SEO' },
-      { name: 'Modern CSS3', level: 'Flex/Grid/Animations' },
-      { name: 'Framer Motion', level: 'Interactive Animations' },
-      { name: 'Responsive Design', level: 'Mobile First' },
-      { name: 'REST APIs', level: 'Integration' },
-    ]
+    category: 'Web & Frontend Development',
+    description: 'Interface architecture, responsive systems & client state',
+    items: ['React.js', 'HTML5 Semantic', 'Modern CSS3', 'Framer Motion', 'REST APIs', 'Vite']
   },
   {
-    id: 'core',
-    title: 'Core Computer Science',
-    icon: <Cpu size={20} className="cat-icon-violet" />,
-    description: 'Computer science principles that drive clean, efficient, and scalable engineering.',
-    skills: [
-      { name: 'Data Structures & Algorithms', level: 'Core Strength' },
-      { name: 'Competitive Programming', level: '1st Runner Up' },
-      { name: 'OOP Concepts', level: 'Modular Design' },
-      { name: 'Digital Signal Processing (DSP)', level: 'Academic Core' },
-      { name: 'Blockchain Fundamentals', level: 'Decentralized Tech' },
-    ]
+    category: 'Computer Science Core',
+    description: 'Algorithmic rigor & theoretical foundations',
+    items: ['Data Structures & Algorithms', 'Competitive Programming', 'OOP Principles', 'Digital Signal Processing (DSP)', 'Blockchain Fundamentals']
   },
   {
-    id: 'tools',
-    title: 'Databases & Developer Tools',
-    icon: <Database size={20} className="cat-icon-emerald" />,
-    description: 'Tools for development, version control, database querying, and hosting.',
-    skills: [
-      { name: 'SQL', level: 'DataCamp Certified' },
-      { name: 'Git & GitHub', level: 'Version Control' },
-      { name: 'VS Code', level: 'Primary IDE' },
-      { name: 'Vite & npm', level: 'Build Tooling' },
-      { name: 'Netlify', level: 'Continuous Deployment' },
-    ]
-  },
-  {
-    id: 'ai',
-    title: 'AI Assisted Workflow',
-    icon: <Sparkles size={20} className="cat-icon-amber" />,
-    description: 'Leveraging cutting-edge AI models to accelerate development and creative assets.',
-    skills: [
-      { name: 'Claude & Sonnet', level: 'Architecture & Coding' },
-      { name: 'ChatGPT & Gemini', level: 'Ideation & Prompting' },
-      { name: 'Antigravity IDE', level: 'Agentic Workflows' },
-      { name: 'Prompt Engineering', level: 'Workflow Automation' },
-    ]
+    category: 'Databases & Developer Tooling',
+    description: 'Data querying, version control & deployment platforms',
+    items: ['SQL (DataCamp Certified)', 'Git & GitHub', 'VS Code', 'Netlify', 'npm']
   }
 ];
 
-const educationData = [
+const educationTimeline = [
   {
-    id: 1,
-    title: 'B.Sc. in Computer Science & Engineering',
+    period: '2023 — 2026',
+    role: 'B.Sc. in Computer Science & Engineering',
     institution: 'Varendra University, Rajshahi',
-    period: '2023 – 2026 (Undergraduate)',
-    type: 'Academic Degree',
-    highlight: 'Key Focus: Algorithms, Data Structures, OOP, Database Systems, Computer Networks.',
-    badge: 'Undergraduate Program'
+    badge: 'Undergraduate Program',
+    description: 'Core focus on Algorithms, Data Structures, Object-Oriented Programming, Database Systems, Computer Networks, and Discrete Mathematics.'
   },
   {
-    id: 2,
-    title: 'Executive Member — Varendra University Chapter',
-    institution: 'BASIS Students\' Forum',
-    period: 'July 2023 – December 2023',
-    type: 'Leadership & Community',
-    highlight: 'Served as an active executive member, organizing tech events, workshops, and student networking.',
-    badge: 'Leadership Certificate'
+    period: 'Jul 2023 — Dec 2023',
+    role: 'Executive Member',
+    institution: 'BASIS Students\' Forum (VU Chapter)',
+    badge: 'Student Leadership',
+    description: 'Coordinated technical workshops, industry-academia meetups, and student programming orientation sessions across the university chapter.'
   },
   {
-    id: 3,
-    title: 'Higher Secondary Certificate (HSC) — Science',
+    period: '2020',
+    role: 'Higher Secondary Certificate (HSC) — Science',
     institution: 'Fakirhat Shahid Smriti College',
-    period: 'Passing Year: 2020',
-    type: 'Academic College',
-    highlight: 'Academic Result: GPA 4.58 / 5.00 in Science division.',
-    badge: 'GPA: 4.58 / 5.00'
+    badge: 'GPA: 4.58 / 5.00',
+    description: 'Pre-university concentration in Higher Mathematics, Physics, Chemistry, and Information Technology.'
   }
 ];
 
 const SkillsEducation = () => {
-  const [activeTab, setActiveTab] = useState('skills');
-
   return (
-    <section className="skills-edu section" id="skills">
+    <section className="skills-editorial section" id="skills">
       <div className="container">
         {/* Section Header */}
-        <div className="section-head-wrapper">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="section-badge-pill mono">
-              <span className="badge-dot"></span> 02 • BACKGROUND & CAPABILITIES
-            </div>
-            <h2 className="section-heading">
-              Skills, <span className="accent-gradient-text">Experience</span> & Education
-            </h2>
-            <p className="section-desc">
-              Strong technical proficiency built on rigorous algorithmic foundations and real development experience.
-            </p>
-          </motion.div>
-
-          {/* Tab Switcher */}
-          <div className="tab-switcher">
-            <button 
-              className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
-              onClick={() => setActiveTab('skills')}
-            >
-              <Code2 size={16} />
-              <span>Technical Skills</span>
-            </button>
-            <button 
-              className={`tab-btn ${activeTab === 'education' ? 'active' : ''}`}
-              onClick={() => setActiveTab('education')}
-            >
-              <GraduationCap size={16} />
-              <span>Education & Leadership</span>
-            </button>
+        <div className="section-header-editorial">
+          <div className="section-label-group">
+            <span className="section-index-pill mono">INDEX / 02</span>
+            <span className="section-divider-dot" />
+            <span className="mono section-meta-note">COMPETENCIES & BACKGROUND</span>
           </div>
+
+          <h2 className="section-editorial-heading">
+            Technical <span className="serif section-serif-italic">Capabilities</span> & Education
+          </h2>
         </div>
 
-        {/* Tab Content: Skills */}
-        <AnimatePresence mode="wait">
-          {activeTab === 'skills' ? (
-            <motion.div 
-              key="skills-tab"
-              className="skills-grid"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-            >
-              {skillCategories.map((cat, idx) => (
-                <div key={cat.id} className="skill-cat-card">
-                  <div className="skill-cat-header">
-                    <div className="skill-cat-icon-box">{cat.icon}</div>
-                    <div>
-                      <h3 className="skill-cat-title">{cat.title}</h3>
-                      <p className="skill-cat-desc">{cat.description}</p>
-                    </div>
+        {/* Two-Column Editorial Grid: Skills Matrix + Journey Timeline */}
+        <div className="skills-editorial-grid">
+          {/* Left Column: Clean Scannable Technical Matrix */}
+          <div className="skills-column">
+            <div className="column-header-block">
+              <span className="column-label mono">TECHNICAL PROFICIENCIES</span>
+              <p className="column-subtext">
+                Demonstrated skills applied in competitive programming contests and production web applications.
+              </p>
+            </div>
+
+            <div className="skills-matrix-list">
+              {skillGroups.map((group, idx) => (
+                <motion.div 
+                  key={idx}
+                  className="skills-matrix-row"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                >
+                  <div className="matrix-cat-info">
+                    <h3 className="matrix-cat-name">{group.category}</h3>
+                    <p className="matrix-cat-sub mono">{group.description}</p>
                   </div>
 
-                  <div className="skills-pill-cloud">
-                    {cat.skills.map((skill, sIdx) => (
-                      <div key={sIdx} className="skill-pill-interactive">
-                        <span className="skill-pill-name">{skill.name}</span>
-                        <span className="skill-pill-level mono">{skill.level}</span>
-                      </div>
+                  <div className="matrix-items-wrap">
+                    {group.items.map((item, iIdx) => (
+                      <span key={iIdx} className="matrix-pill mono">{item}</span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </motion.div>
-          ) : (
-            <motion.div 
-              key="education-tab"
-              className="timeline-container"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="timeline-track">
-                {educationData.map((item, idx) => (
-                  <motion.div 
-                    key={item.id} 
-                    className="timeline-card"
-                    initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.15 }}
-                  >
-                    <div className="timeline-node"></div>
-                    <div className="timeline-inner">
-                      <div className="timeline-header">
-                        <span className="timeline-badge mono">{item.badge}</span>
-                        <span className="timeline-date mono">{item.period}</span>
-                      </div>
-                      
-                      <h3 className="timeline-title">{item.title}</h3>
-                      <p className="timeline-institution">{item.institution}</p>
-                      <p className="timeline-highlight">{item.highlight}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Right Column: Academic & Leadership Timeline */}
+          <div className="timeline-column">
+            <div className="column-header-block">
+              <span className="column-label mono">ACADEMIC & LEADERSHIP JOURNEY</span>
+              <p className="column-subtext">
+                Formal computer science curriculum paired with active university tech community leadership.
+              </p>
+            </div>
+
+            <div className="editorial-timeline-list">
+              {educationTimeline.map((item, idx) => (
+                <motion.div 
+                  key={idx}
+                  className="editorial-timeline-entry"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.12 }}
+                >
+                  <div className="entry-period-meta mono">
+                    <span className="entry-period">{item.period}</span>
+                    <span className="entry-badge">{item.badge}</span>
+                  </div>
+
+                  <h3 className="entry-role">{item.role}</h3>
+                  <div className="entry-institution mono">{item.institution}</div>
+                  <p className="entry-desc">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
