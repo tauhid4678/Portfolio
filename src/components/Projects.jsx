@@ -25,7 +25,7 @@ const projectsList = [
       'Optimized performance with reactive component state'
     ],
     tech: ['React.js', 'Vite', 'Modern CSS', 'Framer Motion'],
-    link: 'https://treeplantguide.netlify.app/', // Safe working fallback
+    link: 'https://roam-vista.vercel.app/', // Safe working fallback
     image: roamvistaImg,
     year: '2025'
   },
