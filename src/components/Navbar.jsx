@@ -4,7 +4,7 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 import './components.css';
 import profileImg from '../assets/profileimg.jpg';
 
-const Navbar = ({ onOpenResume }) => {
+const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -77,13 +77,15 @@ const Navbar = ({ onOpenResume }) => {
 
           {/* Right Action: Resume & Contact */}
           <div className="header-actions">
-            <button 
-              onClick={onOpenResume} 
+            <a 
+              href="https://drive.google.com/drive/folders/1iE-sRT4YUiPb6tXqpZJ02nvqEOnOcM26?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer"
               className="header-text-btn mono"
-              title="View Curriculum Vitae"
+              title="View Resume / CV"
             >
               Resume
-            </button>
+            </a>
 
             <a href="#contact" className="header-cta-pill mono">
               <span>Get in touch</span>
@@ -135,15 +137,15 @@ const Navbar = ({ onOpenResume }) => {
               </div>
 
               <div className="mobile-drawer-footer">
-                <button 
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenResume();
-                  }}
+                <a 
+                  href="https://drive.google.com/drive/folders/1iE-sRT4YUiPb6tXqpZJ02nvqEOnOcM26?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mobile-btn-outline mono"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  View Resume
-                </button>
+                  View Resume / CV
+                </a>
                 <a 
                   href="#contact"
                   className="mobile-btn-filled mono"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BackgroundEffects from './components/BackgroundEffects';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -6,12 +6,10 @@ import Projects from './components/Projects';
 import SkillsEducation from './components/SkillsEducation';
 import Certifications from './components/Certifications';
 import Footer from './components/Footer';
-import ResumeModal from './components/ResumeModal';
+import WhatsAppButton from './components/WhatsAppButton';
 import './App.css';
 
 function App() {
-  const [isResumeOpen, setIsResumeOpen] = useState(false);
-
   return (
     <div className="app-container">
       {/* Dynamic ambient canvas & glow mesh */}
@@ -19,9 +17,9 @@ function App() {
 
       {/* Main interactive application content */}
       <div className="main-content">
-        <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+        <Navbar />
         <main>
-          <Hero onOpenResume={() => setIsResumeOpen(true)} />
+          <Hero />
           <Projects />
           <SkillsEducation />
           <Certifications />
@@ -29,11 +27,8 @@ function App() {
         <Footer />
       </div>
 
-      {/* Interactive & Printable Resume Modal */}
-      <ResumeModal 
-        isOpen={isResumeOpen} 
-        onClose={() => setIsResumeOpen(false)} 
-      />
+      {/* Floating WhatsApp Quick Action Button */}
+      <WhatsAppButton />
     </div>
   );
 }

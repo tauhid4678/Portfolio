@@ -25,6 +25,16 @@ const ResumeModal = ({ isOpen, onClose }) => {
           <div className="resume-modal-topbar">
             <span className="mono resume-doc-tag">CURRICULUM VITAE // MD. TAUHID HASAN</span>
             <div className="resume-topbar-actions">
+              <a 
+                href="https://drive.google.com/drive/folders/1iE-sRT4YUiPb6tXqpZJ02nvqEOnOcM26?usp=sharing" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="resume-icon-action mono" 
+                title="Open CV on Google Drive"
+              >
+                <span>Google Drive</span>
+                <ArrowUpRight size={12} />
+              </a>
               <button onClick={handlePrint} className="resume-icon-action mono" title="Print or Save PDF">
                 <Printer size={14} /> <span>Print</span>
               </button>

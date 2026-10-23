@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Copy, Check, ArrowUp, ArrowUpRight } from 'lucide-react';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 import './components.css';
 
 const Footer = () => {
@@ -122,6 +122,15 @@ const Footer = () => {
                   className="channel-link"
                 >
                   <FaEnvelope size={13} /> Mail App <ArrowUpRight size={11} />
+                </a>
+                <span className="channel-sep">/</span>
+                <a 
+                  href="https://wa.me/tauhid4678" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="channel-link"
+                >
+                  <FaWhatsapp size={13} /> WhatsApp <ArrowUpRight size={11} />
                 </a>
               </div>
             </div>

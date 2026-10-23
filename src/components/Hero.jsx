@@ -6,7 +6,7 @@ import './components.css';
 
 import profileImg from '../assets/profileimg.jpg';
 
-const Hero = ({ onOpenResume }) => {
+const Hero = () => {
   return (
     <section className="hero-editorial section" id="home">
       <div className="container">
@@ -26,14 +26,14 @@ const Hero = ({ onOpenResume }) => {
               </span>
             </motion.div>
 
-            {/* Headline with Editorial Typography */}
+            {/* Headline with Clean Formal Typography */}
             <motion.h1 
               className="hero-editorial-title"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              Building thoughtful, <span className="serif title-serif-italic">high-performance</span> web experiences with algorithmic rigor.
+              Full-Stack & Frontend <span className="serif title-serif-italic">Software Engineer</span>.
             </motion.h1>
 
             {/* Refined Bio & Positioning */}
@@ -58,10 +58,17 @@ const Hero = ({ onOpenResume }) => {
                 <ArrowDown size={14} />
               </a>
 
-              <button onClick={onOpenResume} className="editorial-btn secondary">
+              <a 
+                href="https://drive.google.com/drive/folders/1iE-sRT4YUiPb6tXqpZJ02nvqEOnOcM26?usp=sharing" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="editorial-btn secondary"
+                title="View Curriculum Vitae on Google Drive"
+              >
                 <FileText size={14} />
                 <span>Curriculum Vitae</span>
-              </button>
+                <ArrowUpRight size={12} />
+              </a>
 
               <a href="#contact" className="editorial-btn link-styled">
                 <span>Contact Me</span>
